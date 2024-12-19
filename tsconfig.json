@@ -1,0 +1,40 @@
+{
+  "compilerOptions": {
+    "experimentalDecorators": true, // รองรับ Decorators
+    "emitDecoratorMetadata": true, // รองรับ Decorators Metadata
+    "outDir": "dist", // อัปเดตเพื่อกำหนด output directory
+    "target": "es6", // รองรับ ES6 สำหรับ Node.js และ Browser
+    "module": "esnext", // ใช้โมดูลแบบ ESNext
+    "lib": ["dom", "dom.iterable", "esnext"], // เพิ่มฟีเจอร์ของ DOM และ ESNext
+    "allowJs": true, // อนุญาตการใช้ JavaScript ในโปรเจกต์
+    "skipLibCheck": true, // ข้ามการตรวจสอบ TypeScript Libraries
+    "strict": true, // เปิด strict mode
+    "noEmit": true, // หยุดการสร้างไฟล์ output
+    "esModuleInterop": true, // รองรับ ES Module
+    "moduleResolution": "node", // ใช้การ resolution แบบ Node.js
+    "resolveJsonModule": true, // รองรับการ import ไฟล์ JSON
+    "isolatedModules": true, // สนับสนุนการใช้งาน isolatedModules
+    "jsx": "preserve", // สำหรับ JSX (React)
+    "incremental": true, // การคอมไพล์แบบ incremental
+    "baseUrl": ".", // ตั้งค่า baseUrl ให้เริ่มที่ root
+    "paths": {
+      "@/*": ["./src/*"], // สำหรับ path ในโฟลเดอร์ src
+      "@server/*": ["./server/*"] // เพิ่ม path สำหรับ server
+    },
+    "plugins": [
+      {
+        "name": "next" // ปลั๊กอินสำหรับ Next.js
+      }
+    ]
+  },
+  "include": [
+    "next-env.d.ts", // ค่า default ของ Next.js
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts", // ช่วยรองรับ types ของ Next.js
+    "server/**/*.ts" // เพิ่ม server directory
+  ],
+  "exclude": [
+    "node_modules" // ข้ามการคอมไพล์ใน node_modules
+  ]
+}

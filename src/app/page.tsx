@@ -1,7 +1,25 @@
+"use client";
+
+import React, { useEffect, useState } from "react";
 import Image from "next/image";
 import styles from "./page.module.css";
 
 export default function Home() {
+  const [data, setData] = useState<string | null>(null);
+
+  useEffect(() => {
+    // Fetch the data from the API
+    fetch("http://localhost:3000/api/hello")
+      .then((response) => response.json())
+      .then((data) => {
+        setData(data.message); // Assuming the API response has a `message` field
+      })
+      .catch((error) => {
+        console.error("Error fetching API:", error);
+        setData("Failed to load API data.");
+      });
+  }, []);
+
   return (
     <div className={styles.page}>
       <main className={styles.main}>
@@ -19,6 +37,12 @@ export default function Home() {
           </li>
           <li>Save and see your changes instantly.</li>
         </ol>
+
+        {/* Display data from API */}
+        <div className={styles.apiData}>
+          <h2>API Data:</h2>
+          <p>{data || "Loading..."}</p>
+        </div>
 
         <div className={styles.ctas}>
           <a
@@ -46,50 +70,6 @@ export default function Home() {
           </a>
         </div>
       </main>
-      <footer className={styles.footer}>
-        <a
-          href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/file.svg"
-            alt="File icon"
-            width={16}
-            height={16}
-          />
-          Learn
-        </a>
-        <a
-          href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/window.svg"
-            alt="Window icon"
-            width={16}
-            height={16}
-          />
-          Examples
-        </a>
-        <a
-          href="https://nextjs.org?utm_source=create-next-app&utm_medium=appdir-template&utm_campaign=create-next-app"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          <Image
-            aria-hidden
-            src="https://nextjs.org/icons/globe.svg"
-            alt="Globe icon"
-            width={16}
-            height={16}
-          />
-          Go to nextjs.org →
-        </a>
-      </footer>
     </div>
   );
 }
